@@ -1,22 +1,44 @@
 const Router = require("express").Router;
-const User = require("./model");
+const Users = require("./model");
 
 const router = new Router();
 
+// Testing only
+router.get('/users', (req, res) => {
+   const users = Users
+   .findAll()
+   .then(users => {
+       res.json(users)
+   })
+   .catch(err => {
+     console.log(err)
+     res.status(500)
+     res.json({message: "There was a server error"})
+   })
+})
+
+
+// Get a user by id
 router.get("/users/:id", (req, res) => {
   const userId = req.params.id;
-  User.findById(userId).then(user => {
-    res.send(user);
-  })
+  const users = Users
+    .findById(userId).then(user => {
+      if(user){
+        res.json(user)
+      } else {
+        res.status(404)
+        res.json({ message: "User not found"})
+      }
+    })
   .catch(err => {
-    response.status(500).send({
+    res.status(500).send({
       message: `Something went wrong`,
-      error
+      err
     })
   })
 });
 
-
+// Create a new user
 router.post("/users/:id", (req, res) => {
   const user = req.body;
   User.create(user)

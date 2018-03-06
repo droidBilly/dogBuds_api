@@ -2,10 +2,11 @@ const Sequelize = require('sequelize')
 const sequelize = require('../db')
 
 const Users = sequelize.define('users', {
-  info: {
-    type: Sequelize.JSON,
-    allowNull: false
-}, {
+    info: {
+      type: Sequelize.STRING,
+      allowNull: true
+    }
+  },{
   tableName: 'users',
   timestamps: false
 })
