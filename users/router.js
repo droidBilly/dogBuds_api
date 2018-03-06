@@ -40,7 +40,7 @@ router.get("/users/:id", (req, res) => {
 });
 
 // Create a new user
-// http post :4001/users info=""
+// http post :4001/users info="{ 'username': 'x x', 'preferences': {'african': 21,'appenzeller': 2}"
 
 router.post("/users", (req, res) => {
   const user = req.body;
