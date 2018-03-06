@@ -1,6 +1,9 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const usersRouter = require("./user/router");
+const User = require("./user/model");
+const dogRouter = require("./dogs/router")
 
 app.use(bodyParser.json())
 
@@ -16,3 +19,7 @@ app.use(function(req, res, next) {
 app.get('/', (request, response) => {
       response.send( { message: 'Yay, your setup is workig! Happy coding! BARK! BARK!' })
 })
+
+
+app.use(usersRouter);
+app.use(dogRouter);
