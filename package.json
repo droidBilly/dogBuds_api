@@ -5,8 +5,10 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "connect": "^3.6.6",
     "cors": "^2.8.4",
     "express": "^4.16.2",
+    "logger": "^0.0.1",
     "pg": "6",
     "request": "^2.83.0",
     "sequelize": "^4.35.2",
