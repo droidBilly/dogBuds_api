@@ -10,5 +10,7 @@
     "request": "^2.83.0",
     "sequelize": "^4.35.1",
     "sequelizer": "^1.1.3"
-  }
+  },
+  "repository": "git@github.com:droidBilly/dogBuds_api.git",
+  "author": "FStriewski <fstriewski@outlook.com>"
 }
