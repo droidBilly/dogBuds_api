@@ -3,7 +3,7 @@ const sequelize = require('../db')
 
 const Users = sequelize.define('users', {
     info: {
-      type: Sequelize.STRING,
+      type: Sequelize.JSON,
       allowNull: true
     }
   },{
