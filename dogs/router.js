@@ -1,10 +1,8 @@
 const Router = require("express").Router;
 const router = new Router();
 const apiCall = require("request");
-const path = require('path');
 
-
-var breeds = [
+const breeds = [
 "affenpinscher",
 "african",
 "airedale",
@@ -87,7 +85,6 @@ var breeds = [
 "wolfhound"
 ]
 
-
 router.get("/sniffing/:id", (req, res, next) => {
  const dogId = req.params.id
      var uri = "https://dog.ceo/api/breed/" + breeds[dogId] + "/images/random";
@@ -98,14 +95,19 @@ router.get("/sniffing/:id", (req, res, next) => {
            },
            function(error, response, body) {
              if (!error && response.statusCode === 200) {
-               apiCall(body.message).pipe(res);
+               let breed = breeds[dogId]
+               // apiCall(body.message).pipe(res);
+               res.json({
+                 breed: breed,
+                 image: body.message
+               })
+               res.end()
+
              } else {
-               res.json(error)
+               // res.json(error)
              }
            })
          })
-
-
 
 
 module.exports = router;
