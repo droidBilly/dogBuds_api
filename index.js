@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const eventsRouter = require('./user/router')
 
 app.use(bodyParser.json())
 
@@ -14,4 +13,6 @@ app.use(function(req, res, next) {
   next()
 })
 
-app.use(eventsRouter)
+app.get('/', (request, response) => {
+      response.send( { message: 'Yay, your setup is workig! Happy coding! BARK! BARK!' })
+})
