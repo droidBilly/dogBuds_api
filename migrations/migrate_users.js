@@ -1,7 +1,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('users', {
-
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,8 +9,12 @@ module.exports = {
       },
       info: {
         type: Sequelize.STRING,
-        allowNull: false
-      }
+        allowNull: true
+      },{
+        timestamps: false,
+        createdAt: false,
+        updatedAt: false
+      }  
     });
   },
   down: (queryInterface, Sequelize) => {
