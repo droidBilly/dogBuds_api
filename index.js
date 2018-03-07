@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const dogsRouter = require('./dogs/router')
+const userRouter = require('./users/router')
+
 
 app.use(bodyParser.json())
 
@@ -20,3 +22,4 @@ app.get('/', (request, response) => {
 })
 
 app.use(dogsRouter)
+app.use(userRouter)
