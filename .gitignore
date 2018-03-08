@@ -3,3 +3,4 @@ config.json
 ./node_modules/
 .gitignore
 seed_users2.js
+node_modules/

@@ -26,6 +26,12 @@ router.get('/users', (req, res) => {
    })
 })
 
+//Get users match
+router.get('/users/matches', (req, res) => {
+	res.send([1, 2, 3])
+	})
+
+
 
 // Get a user by id
 router.get("/users/:id", (req, res) => {
