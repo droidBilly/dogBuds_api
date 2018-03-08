@@ -98,6 +98,7 @@ router.get("/sniffing/:id", (req, res, next) => {
                let breed = breeds[dogId]
                // apiCall(body.message).pipe(res);
                res.json({
+                 id: dogId,
                  breed: breed,
                  image: body.message
                })
