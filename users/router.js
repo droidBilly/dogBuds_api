@@ -56,16 +56,17 @@ router.post('/users', (req, res) => {
   const user = {
   	email: req.body.email,
   	password: bcrypt.hashSync(req.body.password, 10),
-                  info: { 'username': req.body.username , 'preferences': []}
+    info: { 'username': req.body.username ,
+            'location': req.body.location,
+            'age':      req.body.age,
+            'preferences': []}
   }
   console.log(user)
   Users
     .create(user)
     .then(entity => {
       res.status(201)
-      res.json({
-          		message: 'user created!'
-          	})
+      res.json(entity)
     })
     .catch(err => {
     	console.error(err)
@@ -113,7 +114,12 @@ router.put('/users/:id', (req, res) => {
 	.then(entity => {
 		if (bcrypt.compareSync(req.body.password, entity.password)) {
 			res.send({
-				jwt: sign(entity.id)
+        id: entity.id,
+				jwt: sign(entity.id),
+        username: entity.info.username,
+        preferences: entity.info.preferences,
+        email: entity.email,
+        message: 'You logged in successfully'
 			})
 		}
 		else {
