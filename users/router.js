@@ -27,10 +27,26 @@ router.get('/users', (req, res) => {
 })
 
 //Get users match
-router.get('/users/matches', (req, res) => {
-	res.send([1, 2, 3])
+router.get('/users/:id/matches', (req, res) => {
+	const matches = [1, 2, 3]
+	const userId = req.params.id;
+	const users = Users
+		.findById(userId).then(user => {
+			if(user){
+				res.status(201)
+				res.send(matches)
+			} else {
+				res.status(404)
+				res.json({ message: "User not found"})
+			}
+		})
+	.catch(err => {
+		res.status(500).send({
+			message: `Something went wrong`,
+			err
+		})
 	})
-
+})
 
 
 // Get a user by id
