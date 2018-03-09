@@ -28,9 +28,6 @@ router.get('/users', (req, res) => {
 
 //Get users match
 router.get('/users/:id/matches', (req, res) => {
-<<<<<<< HEAD
-	res.send([1, 2, 3])
-=======
 	const matches = [1, 2, 3]
 	const userId = req.params.id;
 	const users = Users
@@ -48,7 +45,6 @@ router.get('/users/:id/matches', (req, res) => {
 			message: `Something went wrong`,
 			err
 		})
->>>>>>> 1fb6ecd7a52f32d330be457f0f870ba4e1a03a5f
 	})
 })
 
