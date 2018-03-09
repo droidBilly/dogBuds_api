@@ -85,6 +85,29 @@ const breeds = [
 "wolfhound"
 ]
 
+router.get("/thumbnail/:id", (req, res, next) => {
+ const dogId = req.params.id
+     var uri = "https://dog.ceo/api/breed/" + breeds[dogId] + "/images";
+         apiCall(
+           {
+             url: uri,
+             json: true
+           },
+           function(error, response, body) {
+             if (!error && response.statusCode === 200) {
+               let breed = breeds[dogId]
+               // apiCall(body.message).pipe(res);
+               res.json({
+                 thumbnail: body.message[0]
+               })
+               res.end()
+
+             } else {
+               // res.json(error)
+             }
+           })
+         })
+
 router.get("/sniffing/:id", (req, res, next) => {
  const dogId = req.params.id
      var uri = "https://dog.ceo/api/breed/" + breeds[dogId] + "/images/random";
