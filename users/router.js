@@ -107,9 +107,11 @@ router.post("/users", (req, res) => {
 
 // Update User
 //http put :4001/users/1 info="{ 'username': 'x x', 'preferences': {'african': 9,'appenzeller': 9}"
-router.put("/users/:id", (req, res) => {
-  const usersId = Number(req.params.id);
-  const updates = req.body;
+router.put('/users/:id', (req, res) => {
+    const usersId = Number(req.params.id)
+    const updates =  {
+			info: req.body.preferences,
+		}
 
   Users.findById(req.params.id)
     .then(entity => {
