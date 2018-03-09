@@ -1,4 +1,3 @@
-
 function compareUsers(ourUser, otherUser){
  if (ourUser !== otherUser) {
   let matchingDogs =
@@ -41,8 +40,9 @@ function compareAllUsers (user1, users) {
   for (var i = 0; i < users.length; i++) {
     matches.push(compareUsers(user1, users[i]))
   }
-  return matches.sort().slice(0, 10).reverse()
+  return matches
+  .sort((a,b) => a[0].Score - b[0].Score)
+  .slice(0, 10).reverse()
 }
-
 
 module.exports.compareAllUsers = compareAllUsers  ;
