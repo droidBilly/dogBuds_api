@@ -3,6 +3,7 @@ const Users = require("./model");
 const bcrypt = require('bcrypt')
 const sign = require('../jwt').sign
 const router = new Router();
+const { compareAllUsers } =  require('../matchesAlgorithm')
 
 //Check if User
 const requireUser = (req, res, next) => {
@@ -27,27 +28,28 @@ router.get('/users', (req, res) => {
 })
 
 //Get users match
-router.get('/users/:id/matches', (req, res) => {
-	const matches = [1, 2, 3]
-	const userId = req.params.id;
-	const users = Users
-		.findById(userId).then(user => {
-			if(user){
-				res.status(201)
-				res.send(matches)
-			} else {
-				res.status(404)
-				res.json({ message: "User not found"})
-			}
-		})
-	.catch(err => {
-		res.status(500).send({
-			message: `Something went wrong`,
-			err
-		})
-	})
-})
+router.get("/users/:id/matches", (req, res) => {
+	const matches = []
+  const userId = req.params.id;
+  const users = Users
 
+    .findById(userId).then(user => {
+      if(user){
+
+        res.status(201)
+        res.send(compareAllUsers(user, users.findAll()))
+      } else {
+        res.status(404)
+        res.json({ message: "User not found"})
+      }
+    })
+  .catch(err => {
+    res.status(500).send({
+      message: `Something went wrong`,
+      err
+    })
+  })
+});
 
 // Get a user by id
 router.get("/users/:id", (req, res) => {
