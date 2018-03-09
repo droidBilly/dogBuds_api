@@ -1,5 +1,5 @@
 function compareUsers(ourUser, otherUser) {
-  if (ourUser !== otherUser ) {
+  if (ourUser !== otherUser && otherUser.info.preferences.length != 0 &&  ourUser.info.preferences.length != 0 ) {
     let matchingDogs = ourUser.info.preferences
       .map(x => otherUser.info.preferences.filter(y => y.breed == x.breed))
       .reduce((a, b) => a.concat(b))
@@ -38,7 +38,7 @@ function compareUsers(ourUser, otherUser) {
 }
 
 function compareAllUsers(user1, users) {
-  if (typeof user1 !== "undefined") {
+  // if (typeof user1 !== "undefined" ) {
     let matches = [];
     for (var i = 0; i < users.length; i++) {
       matches.push(compareUsers(user1, users[i]));
@@ -47,7 +47,8 @@ function compareAllUsers(user1, users) {
       .sort((a, b) => a[0].Score - b[0].Score)
       .slice(0, 10)
       .reverse();
-  }
+
+
 }
 
 module.exports.compareAllUsers = compareAllUsers;
