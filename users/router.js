@@ -1,8 +1,8 @@
 const Router = require("express").Router;
 const Users = require("./model");
 const bcrypt = require('bcrypt')
-const sign = require('../jwt').sign
 const router = new Router();
+const sign = require('../jwt').sign
 
 //Check if User
 const requireUser = (req, res, next) => {
@@ -27,20 +27,28 @@ router.get('/users', (req, res) => {
 })
 
 //Get users match
-router.get('/users/matches', (req, res) => {
+router.get('/users/:id/matches', (req, res) => {
 	res.send([1, 2, 3])
 	})
 
 
 
 // Get a user by id
-router.get("/users/:id", (req, res) => {
+router.get("/users/:id" ,(req, res) => {
   const userId = req.params.id;
   const users = Users
     .findById(userId).then(user => {
       if(user){
         res.status(201)
-        res.json(user)
+        res.send({
+					id: user.id,
+		  		email: user.email,
+					username: user.info.username ,
+			    location: user.info.location,
+			    age:      user.info.age,
+		      preferences: [],
+					jwt: sign(user  .id)
+				})
       } else {
         res.status(404)
         res.json({ message: "User not found"})
@@ -72,7 +80,10 @@ router.post('/users', (req, res) => {
     .create(user)
     .then(entity => {
       res.status(201)
-      res.json(entity)
+			res.send({
+				id: entity.id,
+				jwt: sign(entity.id)
+  	})
     })
     .catch(err => {
     	console.error(err)

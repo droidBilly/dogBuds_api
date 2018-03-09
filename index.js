@@ -1,15 +1,17 @@
 const express = require('express')
 const app = express()
+const verify = require('./jwt').verify
+const sign = require('./jwt').sign
+const Users = require("./users/model");
 const bodyParser = require('body-parser')
 const dogsRouter = require('./dogs/router')
 const userRouter = require('./users/router')
-const verify = require('./jwt').verify
-const Users = require("./users/model");
+
 
 app.use(bodyParser.json())
 
 
-app.listen(4002, () => console.log('Express API listening on port 4001'))
+app.listen(4002, () => console.log('Express API listening on port 4002'))
 
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
